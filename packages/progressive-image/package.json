@@ -1,0 +1,42 @@
+{
+  "name": "@madeself/progressive-image",
+  "version": "0.1.0",
+  "description": "Connection-aware blur-up progressive image loader for React",
+  "keywords": [
+    "progressive-image",
+    "blur-up",
+    "react",
+    "nextjs",
+    "image-loading",
+    "lazy-load"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./css": "./css/progressive-image.css"
+  },
+  "files": [
+    "dist",
+    "css"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "typescript": "^5.9.3"
+  }
+}

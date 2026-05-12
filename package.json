@@ -1,0 +1,11 @@
+{
+  "name": "progressive-image-lib",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build":     "npm run build     --workspace=packages/progressive-image",
+    "typecheck": "npm run typecheck --workspace=packages/progressive-image"
+  }
+}

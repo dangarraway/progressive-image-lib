@@ -1,0 +1,73 @@
+/*
+ * @madeself/progressive-image — default styles
+ *
+ * Import once at your app root:
+ *   import '@madeself/progressive-image/css';
+ *
+ * CSS custom properties you can override:
+ *   --pi-vignette-color   Base colour blended at image edges (default: transparent)
+ *   --pi-blur-px          Blur radius for the thumbnail placeholder (default: 14px)
+ */
+
+/* ── Root ────────────────────────────────────────────────────────────────────── */
+.pi-root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ── Blurred thumbnail placeholder ──────────────────────────────────────────── */
+/*
+ * Overshot by 8% on each side so the blur halo is clipped.
+ * scale(1.04) compensates for the apparent shrink from the negative inset.
+ */
+.pi-blur {
+  position: absolute;
+  inset: -8%;
+  background-size: cover;
+  background-position: center top;
+  filter: blur(var(--pi-blur-px, 14px)) saturate(1.1);
+  transform: scale(1.04);
+  opacity: 0;
+  transition: opacity 350ms ease;
+}
+
+.pi-blur.pi-on {
+  opacity: 1;
+}
+
+/* ── Full-resolution image ───────────────────────────────────────────────────── */
+/*
+ * opacity is driven by an inline style on the element (supports fractional
+ * finalOpacity values). The transition handles the fade-in.
+ */
+.pi-full {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: opacity 550ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Vignette overlay ────────────────────────────────────────────────────────── */
+/*
+ * Radial gradient: 80% clear from centre, fades to --pi-vignette-color at edges.
+ * Override the custom property to match your card / container background colour.
+ *
+ * Example (nosaraphoto cream cards):
+ *   .my-card { --pi-vignette-color: rgba(255, 242, 212, 0.96); }
+ */
+.pi-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    transparent 0%,
+    transparent 80%,
+    var(--pi-vignette-color, transparent) 100%
+  );
+}
